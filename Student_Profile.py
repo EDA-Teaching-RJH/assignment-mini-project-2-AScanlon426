@@ -21,6 +21,16 @@ class Student:
             return 0.0
         return statistics.mean(self.subjects.values())
     
+    def save_to_file(self, filename="profile.json"):
+        data = {
+            "full_name": self.full_name,
+            "username": self.username,
+            "subjects": self.subjects,
+            "mean_score": self.calculate_mean()
+        }
+        with open(filename, "w") as f:
+            json.dump(data, f, indent=4)
+
     
 def main():
     name = input("Enter student's full name: ")
@@ -35,6 +45,9 @@ def main():
             student.add_subject(sub, val)
         except ValueError:
             print("Please enter a valid numeric mark.")
+
+        student.save_to_file()
+        print(f"Profile saved! Average score: {student.calculate_mean():.2f}")
 
 if __name__ == "__main__":
     main()
