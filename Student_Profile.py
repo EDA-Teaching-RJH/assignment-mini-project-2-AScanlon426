@@ -16,6 +16,12 @@ class Student:
     def add_subject(self, subject, mark):
         self.subjects[subject] = float(mark)
 
+    def calculate_mean(self):
+        if not self.subjects:
+            return 0.0
+        return statistics.mean(self.subjects.values())
+    
+    
 def main():
     name = input("Enter student's full name: ")
     student = Student(name)
