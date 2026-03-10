@@ -13,11 +13,22 @@ class Student:
             return f"{parts[0][0]}{parts[-1]}"
         return name.lower() if name else "unknown"
 
+    def add_subject(self, subject, mark):
+        self.subjects[subject] = float(mark)
 
 def main():
     name = input("Enter student's full name: ")
     student = Student(name)
     print(f"Generated Username: {student.username}")
+
+    while True:
+        sub = input("Enter subject (or 'done' to exit): ")
+        if sub.lower() == 'done': break
+        try:
+            val = float(input(f"Enter mark for {sub}: "))
+            student.add_subject(sub, val)
+        except ValueError:
+            print("Please enter a valid numeric mark.")
 
 if __name__ == "__main__":
     main()
