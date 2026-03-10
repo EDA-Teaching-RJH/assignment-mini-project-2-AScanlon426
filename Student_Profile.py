@@ -1,7 +1,7 @@
 import json
 import statistics
 
-
+class Student:
 
 
 def main():
