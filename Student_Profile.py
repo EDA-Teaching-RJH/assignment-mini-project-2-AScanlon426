@@ -46,8 +46,8 @@ def main():
         except ValueError:
             print("Please enter a valid numeric mark.")
 
-        student.save_to_file()
-        print(f"Profile saved! Average score: {student.calculate_mean():.2f}")
+    student.save_to_file()
+    print(f"Profile saved! Average score: {student.calculate_mean():.2f}")
 
 if __name__ == "__main__":
     main()
