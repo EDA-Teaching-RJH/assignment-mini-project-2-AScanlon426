@@ -76,7 +76,7 @@ def main():
         sub = input("Enter subject (or 'done' to exit): ")
         if sub.lower() == 'done': break
         try:
-            val = float(input(f"Enter mark for {sub}: "))
+            val = int(input(f"Enter mark for {sub}: "))
             student.add_subject(sub, val)
         except ValueError:
             print("Please enter a valid numeric mark.")
