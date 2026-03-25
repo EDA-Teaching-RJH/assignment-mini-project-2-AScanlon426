@@ -60,3 +60,6 @@ class TestStudentSystem(unittest.TestCase):
         written_data = "".join(call.args[0] for call in mocked_file().write.call_args_list)
         data = json.loads(written_data)
         self.assertEqual(data["jdoe"]["full_name"], "Jane Doe")
+
+if __name__ == "__main__":
+    unittest.main()
