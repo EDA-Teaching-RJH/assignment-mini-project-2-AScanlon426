@@ -20,3 +20,20 @@ class TestStudentSystem(unittest.TestCase):
     def test_username_empty(self):
         s = Student("")
         self.assertEqual(s.username, "unkown")
+
+    def test_calculate_mean(self):
+        self.student.add_subject("Maths", 90)
+        self.student.add_subject("English", 80)
+        self.assertEqual(self.student.calculate_mean(), 85.0)
+
+    def test_calculate_mean_empty(self):
+        self.assertEqual(self.student.calculate_mean(), 0.0)
+
+    def test_standard_div(self):
+        self.student.add_subject("A", 100)
+        self.student.add_subject("B", 0)
+        self.assertAlmostEqual(self.student.standard_deviation(), 70.71, places=2)
+
+    def test_standard_deviation_single_subject(self):
+        self.student.add_subject("A", 100)
+        self.assertEqual(self.student.standard_deviation(), 0.0)
