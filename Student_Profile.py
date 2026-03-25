@@ -22,6 +22,11 @@ class Student:
             return 0.0
         return statistics.mean(self.subjects.values())
     
+    def standard_deviation(self):
+        if len(self.subjects) < 2:
+            return 0.0
+        return statistics.stdev(self.subjects.values())
+    
     def save_to_file(self, filename="profile.json"):
         data = {
             "full_name": self.full_name,
