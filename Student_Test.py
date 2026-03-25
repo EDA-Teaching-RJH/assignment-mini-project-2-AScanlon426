@@ -44,3 +44,19 @@ class TestStudentSystem(unittest.TestCase):
         self.assertFalse(sch.is_eligible())
         sch.add_subject("Math", 90) 
         self.assertTrue(sch.is_eligible())
+
+    def test_add_student_to_classroom(self):
+        self.classroom.add_student(self.student)
+        self.assertIn("jdoe", self.classroom.students)
+        self.assertEqual(self.classroom.students["jdoe"].full_name, "Jane Doe")
+
+    def test_save_database_writes_correct_json(self, mocked_file):
+        self.student.add_subject("Math", 100)
+        self.classroom.add_student(self.student)
+        self.classroom.save_database()
+        
+        mocked_file.assert_called_once_with("test_classroom.json", "w")
+        
+        written_data = "".join(call.args[0] for call in mocked_file().write.call_args_list)
+        data = json.loads(written_data)
+        self.assertEqual(data["jdoe"]["full_name"], "Jane Doe")
