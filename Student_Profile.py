@@ -26,21 +26,38 @@ class Student:
         if len(self.subjects) < 2:
             return 0.0
         return statistics.stdev(self.subjects.values())
+
+class Scholarship(Student):
+    def is_eligible(self):
+        return self.mean_score >= 85.0
     
-    def save_to_file(self, filename="profile.json"):
+class Classroom:
+    def __init__(self,storage_file="classroom.json"):
+        self.storage_file = storage_file
+        self.students = {}
+
+    def add_student(self, student_obj):
+        self.students[student_obj.username] = student_obj
+
+    def save_database(self):
         data = {
             "full_name": self.full_name,
             "username": self.username,
             "subjects": self.subjects,
             "mean_score": self.calculate_mean()
         }
-        with open(filename, "w") as f:
+        with open(self.storage_file, "w") as f:
             json.dump(data, f, indent=4)
 
-class Scholarship(Student):
-    def is_eligible(self):
-        return self.mean_score >= 85.0
-
+    def load_database(self):
+        if not os.path.exists(self.storage_file):
+            return
+        with open(self.storage_file, "r") as f:
+            data = json.load(f)
+            for uname, info in data.items():
+                s = Student(info["name"])
+                s.subjects = info["marks"]
+                self.students[uname] = s
     
 def main():
     name = input("Enter student's full name: ")
