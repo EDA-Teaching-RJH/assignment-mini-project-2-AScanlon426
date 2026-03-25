@@ -37,6 +37,10 @@ class Student:
         with open(filename, "w") as f:
             json.dump(data, f, indent=4)
 
+class Scholarship(Student):
+    def is_eligible(self):
+        return self.mean_score >= 85.0
+
     
 def main():
     name = input("Enter student's full name: ")
