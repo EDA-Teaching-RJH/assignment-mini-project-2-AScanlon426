@@ -37,3 +37,10 @@ class TestStudentSystem(unittest.TestCase):
     def test_standard_deviation_single_subject(self):
         self.student.add_subject("A", 100)
         self.assertEqual(self.student.standard_deviation(), 0.0)
+    
+    def test_scholarship_eligibility(self):
+        sch = Scholarship("Bob Smith")
+        sch.add_subject("Math", 84)
+        self.assertFalse(sch.is_eligible())
+        sch.add_subject("Math", 90) 
+        self.assertTrue(sch.is_eligible())
