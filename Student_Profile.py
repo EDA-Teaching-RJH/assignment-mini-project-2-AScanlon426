@@ -57,8 +57,8 @@ class Classroom:
         with open(self.storage_file, "r") as f:
             data = json.load(f)
             for uname, info in data.items():
-                s = Student(info["name"])
-                s.subjects = info["marks"]
+                s = Student(info["full_name"])
+                s.subjects = info["subjects"]
                 self.students[uname] = s
     
 def main():
